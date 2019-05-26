@@ -11,7 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements FragmentPlatos.OnFragmentInteractionListener, FragmentHacerReserva.OnFragmentInteractionListener, FragmentVerReservas.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements FragmentPlatos.OnFragmentInteractionListener,
+        FragmentHacerReserva.OnFragmentInteractionListener, FragmentVerReservas.OnFragmentInteractionListener {
     Toolbar toolbar;
     FragmentPlatos platosMenu;
     FragmentHacerReserva hacerReserva;

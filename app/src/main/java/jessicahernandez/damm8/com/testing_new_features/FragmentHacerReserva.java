@@ -7,6 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
+
+import java.util.Date;
 
 
 /**
@@ -26,6 +36,19 @@ public class FragmentHacerReserva extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // ELEMENTOS EN PANTALLA
+    EditText edtFecha;
+    EditText edtComensales;
+    EditText edtNombre;
+    EditText edtTelefono;
+    EditText edtComentarios;
+    Button btnHacerReserva;
+
+    // FIREBASE DATABASE
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
+    String databasePath = "reservas";
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +87,41 @@ public class FragmentHacerReserva extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hacer_reserva, container, false);
+        View view = inflater.inflate(R.layout.fragment_hacer_reserva, container, false);
+        edtFecha = view.findViewById(R.id.editFechaID);
+        edtComensales = view.findViewById(R.id.editComensalesID);
+        edtNombre = view.findViewById(R.id.editNombreID);
+        edtTelefono = view.findViewById(R.id.editTelefonoID);
+        edtComentarios = view.findViewById(R.id.editComentariosID);
+        btnHacerReserva = view.findViewById(R.id.btnHacerReserva);
+
+        //Firebase Database
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference(databasePath);
+
+        btnHacerReserva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hacerReserva();
+            }
+        });
+        return view;
+    }
+
+    private void hacerReserva(){
+        final String fecha = edtFecha.getText().toString();
+        final String comensales = edtComensales.getText().toString();
+        final String nombre = edtNombre.getText().toString();
+        final String telefono = edtTelefono.getText().toString();
+        final String comentarios = edtComentarios.getText().toString();
+
+        HacerReservaModel nuevaReserva = new HacerReservaModel(fecha, comensales, nombre, telefono, comentarios);
+
+        String nuevaReservaID = databaseReference.push().getKey();
+        databaseReference.child(nuevaReservaID).setValue(nuevaReserva);
+
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

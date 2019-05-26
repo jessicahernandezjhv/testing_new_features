@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "330732544081",
+    "firebase_url": "https://testingnewfeatures.firebaseio.com",
+    "project_id": "testingnewfeatures",
+    "storage_bucket": "testingnewfeatures.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330732544081:android:da945983c03edc1e",
+        "android_client_info": {
+          "package_name": "jessicahernandez.damm8.com.testing_new_features"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330732544081-glf8a1uta3j90fh9uf14jtnm4hd7j6sd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ1wFYfai4PbrA6aAdrPBd-XdAIPpXgz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330732544081-glf8a1uta3j90fh9uf14jtnm4hd7j6sd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
