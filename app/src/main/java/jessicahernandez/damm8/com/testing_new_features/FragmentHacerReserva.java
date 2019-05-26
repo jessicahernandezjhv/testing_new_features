@@ -3,6 +3,7 @@ package jessicahernandez.damm8.com.testing_new_features;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -48,6 +50,7 @@ public class FragmentHacerReserva extends Fragment {
     // FIREBASE DATABASE
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+    // Elemento raíz de nuestra DataBase
     String databasePath = "reservas";
 
     private OnFragmentInteractionListener mListener;
@@ -99,6 +102,7 @@ public class FragmentHacerReserva extends Fragment {
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference(databasePath);
 
+        //Generamos un listener para cuando clickamos el botón Enviar
         btnHacerReserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +112,7 @@ public class FragmentHacerReserva extends Fragment {
         return view;
     }
 
+    // Función que lee los datos introducidos por el usuario y los escribe en Firebase DB
     private void hacerReserva(){
         final String fecha = edtFecha.getText().toString();
         final String comensales = edtComensales.getText().toString();
@@ -119,8 +124,18 @@ public class FragmentHacerReserva extends Fragment {
 
         String nuevaReservaID = databaseReference.push().getKey();
         databaseReference.child(nuevaReservaID).setValue(nuevaReserva);
+        Toast.makeText(getActivity(),"Reserva realizada",Toast.LENGTH_SHORT).show();
+        clearEditFields();
+    }
 
-
+    // Función que limpia los campos para realizar una nueva reserva
+    public void clearEditFields() {
+        SystemClock.sleep(500);
+        edtFecha.getText().clear();
+        edtComensales.getText().clear();
+        edtNombre.getText().clear();
+        edtTelefono.getText().clear();
+        edtComentarios.getText().clear();
 
     }
 

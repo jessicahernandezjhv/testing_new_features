@@ -12,8 +12,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements FragmentPlatos.OnFragmentInteractionListener,
-        FragmentHacerReserva.OnFragmentInteractionListener, FragmentVerReservas.OnFragmentInteractionListener {
+        FragmentHacerReserva.OnFragmentInteractionListener, FragmentVerReservas.OnFragmentInteractionListener, FragmentWelcome.OnFragmentInteractionListener {
     Toolbar toolbar;
+    FragmentWelcome welcomeScreen;
     FragmentPlatos platosMenu;
     FragmentHacerReserva hacerReserva;
     FragmentVerReservas verReservas;
@@ -24,12 +25,16 @@ public class MainActivity extends AppCompatActivity implements FragmentPlatos.On
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        welcomeScreen = new FragmentWelcome();
         platosMenu = new FragmentPlatos();
         hacerReserva = new FragmentHacerReserva();
         verReservas = new FragmentVerReservas();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.contenedorFragments, welcomeScreen).commit();
+
     }
 
     @Override
