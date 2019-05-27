@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,8 @@ public class FragmentPlatos extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     ArrayList<PlatosModel> listaPlatos;
+    RecyclerView recyclerPlatos;
+    PlatosAdapter adapter;
 
     public FragmentPlatos() {
         // Required empty public constructor
@@ -76,6 +80,10 @@ public class FragmentPlatos extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_platos, container, false);
+        recyclerPlatos = view.findViewById(R.id.recyclerPlatosID);
+        recyclerPlatos.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new PlatosAdapter(listaPlatos);
+        recyclerPlatos.setAdapter(adapter);
 
         HiloAPI hilo = new HiloAPI();
         hilo.execute("https://jdarestaurantapi.firebaseio.com/menu.json");
@@ -162,13 +170,40 @@ public class FragmentPlatos extends Fragment {
                     PlatosModel platos = new PlatosModel();
 
                     JSONObject jsonitem = jsonArray.getJSONObject(i);
-                    platos.setIngredientes(jsonitem.getString("nombre"));
+                    platos.setNombre(jsonitem.getString("nombre"));
+                    platos.setIngredientes(jsonitem.getString("ingredientes"));
+                    platos.setPrecio(jsonitem.getString("precio"));
+                    listaPlatos.add(platos);
+                }
+
+                JSONArray jsonArray2 = jsonObject.getJSONArray("postres");
+                for(int i=0; i<jsonArray.length(); i++) {
+                    PlatosModel platos = new PlatosModel();
+
+                    JSONObject jsonitem = jsonArray2.getJSONObject(i);
+                    platos.setNombre(jsonitem.getString("nombre"));
+                    platos.setIngredientes(jsonitem.getString("ingredientes"));
+                    platos.setPrecio(jsonitem.getString("precio"));
+                    listaPlatos.add(platos);
+                }
+
+                JSONArray jsonArray3 = jsonObject.getJSONArray("principales");
+                for(int i=0; i<jsonArray.length(); i++) {
+                    PlatosModel platos = new PlatosModel();
+
+                    JSONObject jsonitem = jsonArray2.getJSONObject(i);
+                    platos.setNombre(jsonitem.getString("nombre"));
+                    platos.setIngredientes(jsonitem.getString("ingredientes"));
+                    platos.setPrecio(jsonitem.getString("precio"));
+                    listaPlatos.add(platos);
                 }
 
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            adapter.notifyDataSetChanged();
 
         }
 

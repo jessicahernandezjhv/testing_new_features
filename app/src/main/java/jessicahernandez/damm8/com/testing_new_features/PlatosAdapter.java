@@ -1,40 +1,41 @@
 package jessicahernandez.damm8.com.testing_new_features;
 
-public class PlatosAdapter{
-    String nombre;
-    String ingredientes;
-    String precio;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-    public PlatosAdapter() {
+import java.util.ArrayList;
+
+public class PlatosAdapter extends RecyclerView.Adapter<PlatosAdapter.ViewHolderPlatos> {
+    ArrayList<PlatosModel> platos;
+
+    public PlatosAdapter(ArrayList<PlatosModel> platos) {
+        this.platos = platos;
     }
 
-    public PlatosAdapter(String nombre, String ingredientes, String precio) {
-        this.nombre = nombre;
-        this.ingredientes = ingredientes;
-        this.precio = precio;
+    @NonNull
+    @Override
+    public PlatosAdapter.ViewHolderPlatos onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.reserva_item, null, false);
+        return  new ViewHolderPlatos(view);
     }
 
-    public String getNombre() {
-        return nombre;
+    @Override
+    public void onBindViewHolder(@NonNull PlatosAdapter.ViewHolderPlatos viewHolderPlatos, int i) {
+
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    @Override
+    public int getItemCount() {
+        return platos.size();
     }
 
-    public String getIngredientes() {
-        return ingredientes;
-    }
+    public class ViewHolderPlatos extends RecyclerView.ViewHolder {
+        public ViewHolderPlatos(@NonNull View itemView) {
+            super(itemView);
 
-    public void setIngredientes(String ingredientes) {
-        this.ingredientes = ingredientes;
-    }
-
-    public String getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(String precio) {
-        this.precio = precio;
+        }
     }
 }

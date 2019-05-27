@@ -22,7 +22,7 @@ public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.Reserv
     @NonNull
     @Override
     public ReservasViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_item, null, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.reserva_item, null, false);
         return  new ReservasViewHolder(view);
     }
 
