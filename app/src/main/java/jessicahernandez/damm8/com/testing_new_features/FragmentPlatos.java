@@ -2,11 +2,20 @@ package jessicahernandez.damm8.com.testing_new_features;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 
 /**
@@ -28,6 +37,8 @@ public class FragmentPlatos extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    ArrayList<PlatosModel> listaPlatos;
 
     public FragmentPlatos() {
         // Required empty public constructor
@@ -64,7 +75,12 @@ public class FragmentPlatos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_platos, container, false);
+        View view = inflater.inflate(R.layout.fragment_platos, container, false);
+
+        HiloAPI hilo = new HiloAPI();
+        hilo.execute("https://jdarestaurantapi.firebaseio.com/menu.json");
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,4 +121,57 @@ public class FragmentPlatos extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    class HiloAPI extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            HttpURLConnection connection = null;
+            URL url;
+            String result = "";
+
+            try {
+                url = new URL(strings[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = connection.getInputStream();
+
+                int data = inputStream.read();
+
+                while(data != 1) {
+                    result += (char) data;
+                    data = inputStream.read();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String data) {
+            super.onPostExecute(data);
+
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                JSONArray jsonArray = jsonObject.getJSONArray("entrantes");
+
+                for(int i=0; i<jsonArray.length(); i++) {
+                    PlatosModel platos = new PlatosModel();
+
+                    JSONObject jsonitem = jsonArray.getJSONObject(i);
+                    platos.setIngredientes(jsonitem.getString("nombre"));
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
 }
