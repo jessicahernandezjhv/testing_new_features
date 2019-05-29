@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 import static android.view.View.VISIBLE;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -41,10 +40,17 @@ public class FragmentVerReservas extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    // Variables de elementos en pantalla
     ProgressBar spinner;
     RecyclerView recyclerView;
+
+    // Variables de datos obtenidos de firebase
     ArrayList<HacerReservaModel> listaReservas;
+
+    //Variables de firebase
     FirebaseDatabase firebaseDatabase;
+
+    // Variables para la recyclerview
     ReservasAdapter adapter;
 
     private OnFragmentInteractionListener mListener;

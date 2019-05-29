@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,17 +77,18 @@ public class FragmentPlatos extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_platos, container, false);
-        recyclerPlatos = view.findViewById(R.id.recyclerPlatosID);
-        recyclerPlatos.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PlatosAdapter(listaPlatos);
-        recyclerPlatos.setAdapter(adapter);
 
+        listaPlatos = new ArrayList<>();
         HiloAPI hilo = new HiloAPI();
         hilo.execute("https://jdarestaurantapi.firebaseio.com/menu.json");
+
+        recyclerPlatos = (RecyclerView) view.findViewById(R.id.recyclerPlatosID);
+        recyclerPlatos.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter= new PlatosAdapter(listaPlatos);
+        recyclerPlatos.setAdapter(adapter);
 
         return view;
     }
@@ -135,18 +137,20 @@ public class FragmentPlatos extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
 
-            HttpURLConnection connection = null;
+            HttpURLConnection connection;
             URL url;
-            String result = "";
+            connection = null;
+            String result;
+            result ="";
 
-            try {
+            try{
                 url = new URL(strings[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = connection.getInputStream();
 
                 int data = inputStream.read();
 
-                while(data != 1) {
+                while(data != -1) {
                     result += (char) data;
                     data = inputStream.read();
                 }
@@ -155,6 +159,7 @@ public class FragmentPlatos extends Fragment {
                 e.printStackTrace();
             }
 
+            Log.i("RESULT", result);
             return result;
         }
 
@@ -173,28 +178,35 @@ public class FragmentPlatos extends Fragment {
                     platos.setNombre(jsonitem.getString("nombre"));
                     platos.setIngredientes(jsonitem.getString("ingredientes"));
                     platos.setPrecio(jsonitem.getString("precio"));
+
+                    Log.i("Lista", platos.getNombre());
                     listaPlatos.add(platos);
                 }
 
                 JSONArray jsonArray2 = jsonObject.getJSONArray("postres");
-                for(int i=0; i<jsonArray.length(); i++) {
+
+                for(int i=0; i<jsonArray2.length(); i++){
                     PlatosModel platos = new PlatosModel();
 
                     JSONObject jsonitem = jsonArray2.getJSONObject(i);
                     platos.setNombre(jsonitem.getString("nombre"));
                     platos.setIngredientes(jsonitem.getString("ingredientes"));
                     platos.setPrecio(jsonitem.getString("precio"));
+
                     listaPlatos.add(platos);
                 }
 
                 JSONArray jsonArray3 = jsonObject.getJSONArray("principales");
-                for(int i=0; i<jsonArray.length(); i++) {
+
+                for(int i=0; i<jsonArray3.length(); i++){
+
                     PlatosModel platos = new PlatosModel();
 
-                    JSONObject jsonitem = jsonArray2.getJSONObject(i);
+                    JSONObject jsonitem = jsonArray3.getJSONObject(i);
                     platos.setNombre(jsonitem.getString("nombre"));
                     platos.setIngredientes(jsonitem.getString("ingredientes"));
                     platos.setPrecio(jsonitem.getString("precio"));
+
                     listaPlatos.add(platos);
                 }
 

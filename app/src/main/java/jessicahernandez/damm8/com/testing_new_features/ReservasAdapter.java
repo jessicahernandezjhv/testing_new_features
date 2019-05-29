@@ -11,9 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.ReservasViewHolder> {
-    // Declaramos una lista para que almacene los datos de firebase y un intent
+    // Declaramos una lista para que almacene los datos de firebase
     ArrayList<HacerReservaModel> listaReservas;
-    Intent intent;
+    //Intent intent;
 
     public ReservasAdapter(ArrayList<HacerReservaModel> listaReservas) {
         this.listaReservas = listaReservas;
@@ -23,7 +23,7 @@ public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.Reserv
     @Override
     public ReservasViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.reserva_item, null, false);
-        return  new ReservasViewHolder(view);
+        return new ReservasViewHolder(view);
     }
 
     @Override
@@ -47,6 +47,7 @@ public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.Reserv
             verFecha = itemView.findViewById(R.id.verFechaID);
             verComensales = itemView.findViewById(R.id.verComensalesID);
 
+            /*
             // Enviamos los datos a la Activity con la vista detalle
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,13 +59,11 @@ public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.Reserv
                     intent.putExtra("comensales_reserva", listaReservas.get(position).getComensales());
                     view.getContext().startActivity(intent);
                 }
-            });
-
-
+            }); */
         }
 
-        public void asignarDatos(HacerReservaModel hacerReservaModel) {
+        /*public void asignarDatos(HacerReservaModel hacerReservaModel) {
 
-        }
+        }*/
     }
 }
