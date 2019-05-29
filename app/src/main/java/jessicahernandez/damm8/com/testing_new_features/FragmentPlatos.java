@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,6 +43,7 @@ public class FragmentPlatos extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     ArrayList<PlatosModel> listaPlatos;
+    ProgressBar spinner;
     RecyclerView recyclerPlatos;
     PlatosAdapter adapter;
 
@@ -80,6 +82,8 @@ public class FragmentPlatos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_platos, container, false);
+        spinner = (ProgressBar) view.findViewById(R.id.progressBar2);
+        spinner.setVisibility(View.VISIBLE);
 
         listaPlatos = new ArrayList<>();
         HiloAPI hilo = new HiloAPI();
@@ -215,6 +219,7 @@ public class FragmentPlatos extends Fragment {
                 e.printStackTrace();
             }
 
+            spinner.setVisibility(View.GONE);
             adapter.notifyDataSetChanged();
 
         }
