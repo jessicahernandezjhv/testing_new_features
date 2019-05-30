@@ -45,6 +45,7 @@ public class FragmentHacerReserva extends Fragment {
     // FIREBASE DATABASE
     FirebaseDatabase database;
     DatabaseReference databaseReference;
+
     // Elemento raíz de nuestra DataBase
     String databasePath = "reservas";
 

@@ -51,6 +51,9 @@ public class FragmentVerReservas extends Fragment {
     // Variables para la recyclerview
     AdapterReservas adapter;
 
+    // Elemento raíz de nuestra DataBase
+    String databasePath = "reservas";
+
     private OnFragmentInteractionListener mListener;
 
     public FragmentVerReservas() {
@@ -98,7 +101,7 @@ public class FragmentVerReservas extends Fragment {
 
         //Obtener los datos de Realtime Database
         firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.getReference().child("reservas").addChildEventListener(new ChildEventListener() {
+        firebaseDatabase.getReference().child(databasePath).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ModelReservas reserva;
