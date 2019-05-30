@@ -1,6 +1,5 @@
 package jessicahernandez.damm8.com.testing_new_features;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,12 +9,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.ReservasViewHolder> {
+public class AdapterReservas extends RecyclerView.Adapter<AdapterReservas.ReservasViewHolder> {
     // Declaramos una lista para que almacene los datos de firebase
-    ArrayList<HacerReservaModel> listaReservas;
+    ArrayList<ModelReservas> listaReservas;
     //Intent intent;
 
-    public ReservasAdapter(ArrayList<HacerReservaModel> listaReservas) {
+    public AdapterReservas(ArrayList<ModelReservas> listaReservas) {
         this.listaReservas = listaReservas;
     }
 
@@ -54,7 +53,7 @@ public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.Reserv
                 public void onClick(View view) {
                     int position = getAdapterPosition();
 
-                    intent = new Intent(view.getContext(), HacerReservaModel.class);
+                    intent = new Intent(view.getContext(), ModelReservas.class);
                     intent.putExtra("fecha_reserva", listaReservas.get(position).getFecha());
                     intent.putExtra("comensales_reserva", listaReservas.get(position).getComensales());
                     view.getContext().startActivity(intent);
@@ -62,7 +61,7 @@ public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.Reserv
             }); */
         }
 
-        /*public void asignarDatos(HacerReservaModel hacerReservaModel) {
+        /*public void asignarDatos(ModelReservas hacerReservaModel) {
 
         }*/
     }

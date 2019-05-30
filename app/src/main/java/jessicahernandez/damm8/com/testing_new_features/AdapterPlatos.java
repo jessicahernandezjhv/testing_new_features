@@ -9,23 +9,23 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PlatosAdapter extends RecyclerView.Adapter<PlatosAdapter.ViewHolderPlatos> {
-    ArrayList<PlatosModel> listaPlatos;
+public class AdapterPlatos extends RecyclerView.Adapter<AdapterPlatos.ViewHolderPlatos> {
+    ArrayList<ModelPlatos> listaPlatos;
 
-    public PlatosAdapter(ArrayList<PlatosModel> listaPlatos) {
+    public AdapterPlatos(ArrayList<ModelPlatos> listaPlatos) {
         this.listaPlatos = listaPlatos;
     }
 
     @NonNull
     @Override
-    public PlatosAdapter.ViewHolderPlatos onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public AdapterPlatos.ViewHolderPlatos onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.plato_item, null, false);
         return new ViewHolderPlatos(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlatosAdapter.ViewHolderPlatos viewHolderPlatos, int position) {
+    public void onBindViewHolder(@NonNull AdapterPlatos.ViewHolderPlatos viewHolderPlatos, int position) {
         viewHolderPlatos.nombrePlato.setText("Nombre: "+listaPlatos.get(position).getNombre());
         viewHolderPlatos.ingredientesPlato.setText("Ingredientes: "+listaPlatos.get(position).getIngredientes());
         viewHolderPlatos.precioPlato.setText("Precio: "+ listaPlatos.get(position).getPrecio());

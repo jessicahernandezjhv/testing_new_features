@@ -2,17 +2,17 @@ package jessicahernandez.damm8.com.testing_new_features;
 
 import java.util.Date;
 
-public class HacerReservaModel {
+public class ModelReservas {
     private String fecha;
     private String comensales;
     private String nombre;
     private String telefono;
     private String comentarios;
 
-    public HacerReservaModel() {
+    public ModelReservas() {
     }
 
-    public HacerReservaModel(String fecha, String comensales, String nombre, String telefono, String comentarios) {
+    public ModelReservas(String fecha, String comensales, String nombre, String telefono, String comentarios) {
         this.fecha = fecha;
         this.comensales = comensales;
         this.nombre = nombre;

@@ -20,8 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import static android.view.View.VISIBLE;
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -45,13 +43,13 @@ public class FragmentVerReservas extends Fragment {
     RecyclerView recyclerView;
 
     // Variables de datos obtenidos de firebase
-    ArrayList<HacerReservaModel> listaReservas;
+    ArrayList<ModelReservas> listaReservas;
 
     //Variables de firebase
     FirebaseDatabase firebaseDatabase;
 
     // Variables para la recyclerview
-    ReservasAdapter adapter;
+    AdapterReservas adapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -95,7 +93,7 @@ public class FragmentVerReservas extends Fragment {
         spinner = (ProgressBar) view.findViewById(R.id.progressBar1);
         spinner.setVisibility(View.VISIBLE);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ReservasAdapter(listaReservas);
+        adapter = new AdapterReservas(listaReservas);
         recyclerView.setAdapter(adapter);
 
         //Obtener los datos de Realtime Database
@@ -103,8 +101,8 @@ public class FragmentVerReservas extends Fragment {
         firebaseDatabase.getReference().child("reservas").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                HacerReservaModel reserva;
-                reserva = dataSnapshot.getValue(HacerReservaModel.class);
+                ModelReservas reserva;
+                reserva = dataSnapshot.getValue(ModelReservas.class);
                 listaReservas.add(reserva);
                 adapter.notifyDataSetChanged();
                 spinner.setVisibility(View.GONE);

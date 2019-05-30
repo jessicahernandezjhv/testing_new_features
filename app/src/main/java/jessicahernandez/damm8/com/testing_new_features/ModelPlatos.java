@@ -1,14 +1,14 @@
 package jessicahernandez.damm8.com.testing_new_features;
 
-public class PlatosModel {
+public class ModelPlatos {
     String nombre;
     String ingredientes;
     String precio;
 
-    public PlatosModel() {
+    public ModelPlatos() {
     }
 
-    public PlatosModel(String nombre, String ingredientes, String precio) {
+    public ModelPlatos(String nombre, String ingredientes, String precio) {
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.precio = precio;

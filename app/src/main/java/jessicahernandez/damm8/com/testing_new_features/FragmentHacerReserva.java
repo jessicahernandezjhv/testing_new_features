@@ -10,15 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
-
-import java.util.Date;
 
 
 /**
@@ -120,7 +115,7 @@ public class FragmentHacerReserva extends Fragment {
         final String telefono = edtTelefono.getText().toString();
         final String comentarios = edtComentarios.getText().toString();
 
-        HacerReservaModel nuevaReserva = new HacerReservaModel(fecha, comensales, nombre, telefono, comentarios);
+        ModelReservas nuevaReserva = new ModelReservas(fecha, comensales, nombre, telefono, comentarios);
 
         String nuevaReservaID = databaseReference.push().getKey();
         databaseReference.child(nuevaReservaID).setValue(nuevaReserva);

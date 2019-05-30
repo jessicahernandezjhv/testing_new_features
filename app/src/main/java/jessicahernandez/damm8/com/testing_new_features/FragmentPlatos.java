@@ -42,10 +42,10 @@ public class FragmentPlatos extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    ArrayList<PlatosModel> listaPlatos;
+    ArrayList<ModelPlatos> listaPlatos;
     ProgressBar spinner;
     RecyclerView recyclerPlatos;
-    PlatosAdapter adapter;
+    AdapterPlatos adapter;
 
     public FragmentPlatos() {
         // Required empty public constructor
@@ -91,7 +91,7 @@ public class FragmentPlatos extends Fragment {
 
         recyclerPlatos = (RecyclerView) view.findViewById(R.id.recyclerPlatosID);
         recyclerPlatos.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter= new PlatosAdapter(listaPlatos);
+        adapter= new AdapterPlatos(listaPlatos);
         recyclerPlatos.setAdapter(adapter);
 
         return view;
@@ -170,7 +170,7 @@ public class FragmentPlatos extends Fragment {
                 JSONArray jsonArray = jsonObject.getJSONArray("entrantes");
 
                 for(int i=0; i<jsonArray.length(); i++) {
-                    PlatosModel platos = new PlatosModel();
+                    ModelPlatos platos = new ModelPlatos();
 
                     JSONObject jsonitem = jsonArray.getJSONObject(i);
                     platos.setNombre(jsonitem.getString("nombre"));
@@ -184,7 +184,7 @@ public class FragmentPlatos extends Fragment {
                 JSONArray jsonArray2 = jsonObject.getJSONArray("postres");
 
                 for(int i=0; i<jsonArray2.length(); i++){
-                    PlatosModel platos = new PlatosModel();
+                    ModelPlatos platos = new ModelPlatos();
 
                     JSONObject jsonitem = jsonArray2.getJSONObject(i);
                     platos.setNombre(jsonitem.getString("nombre"));
@@ -197,7 +197,7 @@ public class FragmentPlatos extends Fragment {
                 JSONArray jsonArray3 = jsonObject.getJSONArray("principales");
 
                 for(int i=0; i<jsonArray3.length(); i++){
-                    PlatosModel platos = new PlatosModel();
+                    ModelPlatos platos = new ModelPlatos();
 
                     JSONObject jsonitem = jsonArray3.getJSONObject(i);
                     platos.setNombre(jsonitem.getString("nombre"));
