@@ -137,28 +137,22 @@ public class FragmentPlatos extends Fragment {
     }
 
     class HiloAPI extends AsyncTask<String, Void, String> {
-
         @Override
         protected String doInBackground(String... strings) {
-
             HttpURLConnection connection;
             URL url;
-            connection = null;
-            String result;
-            result ="";
+            String result = "";
 
             try{
                 url = new URL(strings[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = connection.getInputStream();
-
                 int data = inputStream.read();
 
                 while(data != -1) {
                     result += (char) data;
                     data = inputStream.read();
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -183,8 +177,8 @@ public class FragmentPlatos extends Fragment {
                     platos.setIngredientes(jsonitem.getString("ingredientes"));
                     platos.setPrecio(jsonitem.getString("precio"));
 
-                    Log.i("Lista", platos.getNombre());
                     listaPlatos.add(platos);
+                    Log.i("Lista", platos.getNombre());
                 }
 
                 JSONArray jsonArray2 = jsonObject.getJSONArray("postres");
@@ -203,7 +197,6 @@ public class FragmentPlatos extends Fragment {
                 JSONArray jsonArray3 = jsonObject.getJSONArray("principales");
 
                 for(int i=0; i<jsonArray3.length(); i++){
-
                     PlatosModel platos = new PlatosModel();
 
                     JSONObject jsonitem = jsonArray3.getJSONObject(i);
@@ -213,17 +206,11 @@ public class FragmentPlatos extends Fragment {
 
                     listaPlatos.add(platos);
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             spinner.setVisibility(View.GONE);
             adapter.notifyDataSetChanged();
-
         }
-
     }
-
 }
